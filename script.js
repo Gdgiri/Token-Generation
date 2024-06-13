@@ -21,6 +21,9 @@ class SequenceTokenGenerator {
     // Combine all parts to form the token
     const token = `${day}-${month}-${year}-${this.counter}`;
 
+    // Save the generated token to local storage
+    localStorage.setItem("lastGeneratedToken", token);
+
     return token;
   }
 }
@@ -33,6 +36,14 @@ function generateAndDisplayToken() {
   console.log("Generated Token:", token);
   document.getElementById("tokenDisplay").textContent = token;
 }
+
+// Retrieve and display the last generated token when the page loads
+window.onload = function () {
+  const lastToken = localStorage.getItem("lastGeneratedToken");
+  if (lastToken) {
+    document.getElementById("tokenDisplay").textContent = lastToken;
+  }
+};
 
 // Attach the generateAndDisplayToken function to a button click
 document
