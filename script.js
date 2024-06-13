@@ -26,6 +26,15 @@ class SequenceTokenGenerator {
 
     return token;
   }
+
+  resetToken() {
+    // Reset the counter
+    this.counter = 0;
+
+    // Clear local storage
+    localStorage.removeItem("tokenCounter");
+    localStorage.removeItem("lastGeneratedToken");
+  }
 }
 
 // Usage example
@@ -35,6 +44,11 @@ function generateAndDisplayToken() {
   const token = tokenGenerator.generateToken();
   console.log("Generated Token:", token);
   document.getElementById("tokenDisplay").textContent = token;
+}
+
+function resetToken() {
+  tokenGenerator.resetToken();
+  document.getElementById("tokenDisplay").textContent = "";
 }
 
 // Retrieve and display the last generated token when the page loads
@@ -49,3 +63,6 @@ window.onload = function () {
 document
   .getElementById("generateTokenButton")
   .addEventListener("click", generateAndDisplayToken);
+
+// Attach the resetToken function to the reset button click
+document.getElementById("resetButton").addEventListener("click", resetToken);
